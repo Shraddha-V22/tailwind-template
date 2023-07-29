@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar";
 import CategoryVideos from "./pages/CategoryVideos";
 import Video from "./pages/Video";
 import SinglePlaylist from "./pages/SinglePlaylist";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -24,6 +25,21 @@ function App() {
           <Route path="/playlist/:playlistId" element={<SinglePlaylist />} />
         </Routes>
       </section>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        containerStyle={{ top: "10%" }}
+        toastOptions={{
+          style: { maxWidth: 500 },
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
     </div>
   );
 }

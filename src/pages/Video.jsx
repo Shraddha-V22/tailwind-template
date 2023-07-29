@@ -14,6 +14,7 @@ import Modal from "../components/Modal";
 import AddNote from "../components/AddNote";
 import NoteItem from "../components/NoteItem";
 import { faSquarePen } from "@fortawesome/free-solid-svg-icons";
+import toast from "react-hot-toast";
 
 export default function Video() {
   const { videoId } = useParams();
@@ -43,23 +44,25 @@ export default function Video() {
             <div className="flex items-start gap-4">
               {watchLater?.find(({ _id }) => _id == videoId) ? (
                 <button
-                  onClick={() =>
+                  onClick={() => {
                     videosDispatch({
                       type: VIDEO.WATCH_LATER,
                       payload: video,
-                    })
-                  }
+                    });
+                    toast("video removed from watch later!");
+                  }}
                 >
                   <FontAwesomeIcon icon={faClockFilled} />
                 </button>
               ) : (
                 <button
-                  onClick={() =>
+                  onClick={() => {
                     videosDispatch({
                       type: VIDEO.WATCH_LATER,
                       payload: video,
-                    })
-                  }
+                    });
+                    toast("video added to watch later!");
+                  }}
                 >
                   <FontAwesomeIcon icon={faClock} />
                 </button>
@@ -113,7 +116,7 @@ export default function Video() {
             </div>
           </div>
         </div>
-        <div className="px-1 py-6">
+        <div className="flex flex-col gap-4 px-1 py-6">
           <h2 className="text-lg font-semibold">My Notes</h2>
           <AllNotes notes={video?.notes} videoId={videoId} />
         </div>
@@ -131,7 +134,7 @@ export default function Video() {
 
 function AllNotes({ notes, videoId }) {
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       {notes?.map((note) => (
         <NoteItem key={note._id} noteData={note} videoId={videoId} />
       ))}

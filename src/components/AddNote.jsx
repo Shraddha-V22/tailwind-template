@@ -2,6 +2,7 @@ import React from "react";
 import { useVideos } from "../contexts/VideoProvider";
 import { VIDEO } from "../utils/reducerTypes";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function AddNote({ videoId, setOpen, edit, noteData }) {
   const { videosDispatch } = useVideos();
@@ -24,6 +25,7 @@ export default function AddNote({ videoId, setOpen, edit, noteData }) {
               payload: { videoId, noteText },
             });
             setOpen(false);
+            toast("Note added!");
           }}
         >
           Add Note
@@ -36,6 +38,7 @@ export default function AddNote({ videoId, setOpen, edit, noteData }) {
               payload: { videoId, noteId: noteData._id, noteText },
             });
             setOpen(false);
+            toast("Note edited!");
           }}
         >
           Edit Note
