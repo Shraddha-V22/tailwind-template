@@ -86,6 +86,7 @@ export default function Video() {
                               payload: { playlistId: pl._id, video: video },
                             });
                             setShowPlaylists(false);
+                            toast("video added to playlist");
                           }}
                           key={pl._id}
                         >
